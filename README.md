@@ -1,5 +1,5 @@
 # ProPunish
-[![GitHub issues](https://img.shields.io/github/issues/MrFishCakes/ProPunish)](https://github.com/MrFishCakes/ProPunish/issues)
+[![GitHub issues](https://img.shields.io/github/issues/MrFishCakes/ProPunish)](https://github.com/MrFishCakes/ProPunish/issues) [![GitHub license](https://img.shields.io/github/license/MrFishCakes/ProPunish?logo=f)](https://github.com/MrFishCakes/ProPunish/blob/master/LICENSE)
 #### Description
 ProPunish aims to be your solution with infractions. It will aim to hold mutes, bans and warnings before the 1.0 release. It will then expand into having punishments for IP addresses.
 
