@@ -1,0 +1,29 @@
+Storage:
+  # Valid types are: JSON
+  # For SQL types, be sure to fill out the information needed
+  Type: 'JSON'
+Messages:
+  PermanentBan: |
+    &cYou are permanently banned from this server!
+
+    &7Issuer: &c{punish_issuer_name}
+    &7Reason: &c{punish_reason}
+    &7Expires: &cPermanent
+
+    &cAppeal at: &nspigotmc.org
+  TemporaryBan: |
+    &cYou are banned from this server!
+
+    &7Issuer: &c{punish_issuer_name}
+    &7Reason: &c{punish_reason}
+    &7Expires: &c{punish_expire_date}
+
+    &cAppeal at: &nspigotmc.org
+  PermanentMute: |
+    &7You are permanently muted!
+    &7Issuer: &c{punish_issuer_name}
+    &7Reason: &c{punish_reason}
+  TemporaryMute: |
+    &7You are muted until &c{punish_expire_date}
+    &7Issuer: &c{punish_issuer_name}
+    &7Reason: &c{punish_reason}

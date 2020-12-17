@@ -1,0 +1,6 @@
+name: ProPunish
+version: ${project.version}
+main: me.mrfishcakes.propunish.ProPunishSpigot
+api-version: 1.16
+authors: [MrFishCakes]
+description: ProPunish plugin for Spigot

@@ -1,0 +1,5 @@
+name: ProPunish
+version: ${project.version}
+main: me.mrfishcakes.propunish.ProPunishBungeeCord
+description: ProPunish plugin for BungeeCord
+author: MrFishCakes
