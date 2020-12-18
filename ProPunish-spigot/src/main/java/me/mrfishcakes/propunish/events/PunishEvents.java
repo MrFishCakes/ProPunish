@@ -37,11 +37,6 @@ public final class PunishEvents extends PunishmentPlaceholder implements Listene
         if (bans.isEmpty()) return;
 
         final Punishment ban = bans.get(0);
-        if (ban == null) {
-            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER,
-                    ChatColor.RED + "An internal error occurred when logging in!");
-            throw new NullPointerException("Ban was found but returned null");
-        }
 
         String screen = ban.isPermanent() ? plugin.getConfigYaml().getString(
                 "Messages.PermanentBan") : plugin.getConfigYaml().getString(
