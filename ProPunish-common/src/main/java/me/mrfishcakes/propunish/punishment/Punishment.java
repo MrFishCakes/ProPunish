@@ -1,4 +1,4 @@
-package me.mrfishcakes.propunish.types;
+package me.mrfishcakes.propunish.punishment;
 
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package me.mrfishcakes.propunish.types;
+package me.mrfishcakes.propunish.punishment;
 
 public enum PunishmentType {
 

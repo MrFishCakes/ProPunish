@@ -1,8 +1,8 @@
-package me.mrfishcakes.propunish.types.collections;
+package me.mrfishcakes.propunish.punishment.collections;
 
+import me.mrfishcakes.propunish.punishment.Punishment;
+import me.mrfishcakes.propunish.punishment.PunishmentType;
 import me.mrfishcakes.propunish.storage.PunishmentStorage;
-import me.mrfishcakes.propunish.types.Punishment;
-import me.mrfishcakes.propunish.types.PunishmentType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
