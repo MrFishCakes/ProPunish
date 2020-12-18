@@ -1,6 +1,7 @@
 package me.mrfishcakes.propunish;
 
 import de.leonhard.storage.Config;
+import me.mrfishcakes.propunish.event.BungeePunishEvent;
 import me.mrfishcakes.propunish.events.PunishEvents;
 import me.mrfishcakes.propunish.plugin.ProPunishPlugin;
 import me.mrfishcakes.propunish.storage.PunishmentComparator;
@@ -63,6 +64,17 @@ public final class ProPunishBungeeCord extends Plugin implements ProPunishPlugin
     }
 
     @Override
+    public void callPunishEvent(@NotNull Punishment punishment) {
+        getProxy().getPluginManager().callEvent(new BungeePunishEvent(punishment));
+    }
+
+    @Override
+    public void disablePlugin() {
+        getProxy().getPluginManager().unregisterCommands(this);
+        getProxy().getPluginManager().unregisterListeners(this);
+    }
+
+    @Override
     public void log(@NotNull Level level, @NotNull String message) {
         getLogger().log(level, message);
     }
@@ -70,12 +82,6 @@ public final class ProPunishBungeeCord extends Plugin implements ProPunishPlugin
     @Override
     public void log(@NotNull Level level, @NotNull String message, @NotNull Throwable throwable) {
         getLogger().log(level, message, throwable);
-    }
-
-    @Override
-    public void disablePlugin() {
-        getProxy().getPluginManager().unregisterCommands(this);
-        getProxy().getPluginManager().unregisterListeners(this);
     }
 
     @Override

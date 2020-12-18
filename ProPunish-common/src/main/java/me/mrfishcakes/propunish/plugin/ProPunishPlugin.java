@@ -74,6 +74,18 @@ public interface ProPunishPlugin {
     }
 
     /**
+     * Call a punishment event.
+     *
+     * @param punishment {@link Punishment} for the event
+     */
+    void callPunishEvent(@NotNull final Punishment punishment);
+
+    /**
+     * Disable the plugin, unregistering all commands and listeners.
+     */
+    void disablePlugin();
+
+    /**
      * Send a message to the {@link Logger}.
      *
      * @param level   {@link Level} to log at
@@ -92,11 +104,6 @@ public interface ProPunishPlugin {
      */
     void log(@NotNull final Level level, @NotNull final String message,
              @NotNull final Throwable throwable);
-
-    /**
-     * Disable the plugin, unregistering all commands and listeners.
-     */
-    void disablePlugin();
 
     /**
      * Get the {@link Comparator} for sorting punishments

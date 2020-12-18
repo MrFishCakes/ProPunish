@@ -1,6 +1,7 @@
 package me.mrfishcakes.propunish;
 
 import de.leonhard.storage.Config;
+import me.mrfishcakes.propunish.event.SpigotPunishEvent;
 import me.mrfishcakes.propunish.events.PunishEvents;
 import me.mrfishcakes.propunish.plugin.ProPunishPlugin;
 import me.mrfishcakes.propunish.storage.PunishmentComparator;
@@ -64,6 +65,16 @@ public final class ProPunishSpigot extends JavaPlugin implements ProPunishPlugin
     }
 
     @Override
+    public void callPunishEvent(@NotNull Punishment punishment) {
+        Bukkit.getPluginManager().callEvent(new SpigotPunishEvent(punishment));
+    }
+
+    @Override
+    public void disablePlugin() {
+        Bukkit.getPluginManager().disablePlugin(this);
+    }
+
+    @Override
     public void log(@NotNull Level level, @NotNull String message) {
         getLogger().log(level, message);
     }
@@ -71,11 +82,6 @@ public final class ProPunishSpigot extends JavaPlugin implements ProPunishPlugin
     @Override
     public void log(@NotNull Level level, @NotNull String message, @NotNull Throwable throwable) {
         getLogger().log(level, message, throwable);
-    }
-
-    @Override
-    public void disablePlugin() {
-        Bukkit.getPluginManager().disablePlugin(this);
     }
 
     @Override
