@@ -1,15 +1,22 @@
 package me.mrfishcakes.propunish.plugin;
 
 import de.leonhard.storage.Config;
+import de.leonhard.storage.LightningBuilder;
+import de.leonhard.storage.internal.settings.ConfigSettings;
+import de.leonhard.storage.internal.settings.ReloadSettings;
 import me.mrfishcakes.propunish.storage.PunishmentStorage;
+import me.mrfishcakes.propunish.storage.types.h2.H2PunishmentStorage;
+import me.mrfishcakes.propunish.storage.types.json.JsonPunishmentStorage;
 import me.mrfishcakes.propunish.types.Punishment;
 import net.byteflux.libby.Library;
 import net.byteflux.libby.LibraryManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +33,44 @@ public interface ProPunishPlugin {
                 .artifactId("SimplixStorage").version("3.2.1").build();
         libraryManager.downloadLibrary(simplixStorage);
         libraryManager.loadLibrary(simplixStorage);
+    }
+
+    /**
+     * Create and load the default {@link Config} file.
+     *
+     * @param input Config file as {@link InputStream}
+     * @return {@link Optional} with/without the {@link Config}
+     */
+    default Optional<Config> setupConfig(final InputStream input) {
+        if (input == null) {
+            log(Level.SEVERE, "There was no 'config.yml' found",
+                    new NullPointerException("No 'config.yml' found"));
+            disablePlugin();
+            return Optional.empty();
+        }
+
+        Config config = LightningBuilder.fromFile(new File(getPluginFolder(), "config.yml"))
+                .addInputStream(input).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
+                .setReloadSettings(ReloadSettings.MANUALLY).createConfig();
+
+        return Optional.of(config);
+    }
+
+    /**
+     * Setup the {@link PunishmentStorage} and the appropriate adapter.
+     *
+     * @return {@link Optional} with/without the {@link PunishmentStorage}
+     */
+    default Optional<PunishmentStorage> setupStorage() {
+        final Config config = getConfigYaml();
+
+        switch (config.getOrDefault("Storage.Type", "h2").toLowerCase()) {
+            case "json":
+                return Optional.of(new JsonPunishmentStorage(this));
+            case "h2":
+            default:
+                return Optional.of(new H2PunishmentStorage(this));
+        }
     }
 
     /**
@@ -47,6 +92,11 @@ public interface ProPunishPlugin {
      */
     void log(@NotNull final Level level, @NotNull final String message,
              @NotNull final Throwable throwable);
+
+    /**
+     * Disable the plugin, unregistering all commands and listeners.
+     */
+    void disablePlugin();
 
     /**
      * Get the {@link Comparator} for sorting punishments
